@@ -27,7 +27,7 @@
     isSubmitted = true;
 
     const payload: loginIn = { username, password }
-    const url: string = import.meta.env.VITE_WEB_HOST+'/api/auth/login';
+    const url: string = import.meta.env.VITE_WEB_HOST+'/auth/login';
 
     await axios.post(url, payload,
       { headers: { 'Content-Type': 'application/json' } }
@@ -61,7 +61,7 @@
       <Icon src={TrOutlineHome} size="20" className="group-hover:stroke-violet-500" />
     </a>
   </header>
-  <form class="flex flex-col gap-4">
+  <form class="flex flex-col gap-4">  
     <InputBox
       id="username"
       type="text"
