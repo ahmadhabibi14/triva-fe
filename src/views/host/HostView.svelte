@@ -1,6 +1,7 @@
 <script lang="ts">
   import HostLoginView from './HostLoginView.svelte';
   import HostRegisterView from './HostRegisterView.svelte';
+  import HostQuizListView from './HostQuizListView.svelte';
   import { ModeHostState, ModeHostPassed, ModeHostLogin, ModeHostRegister } from '../../states/mode';
   import { onMount } from 'svelte';
 
@@ -15,7 +16,7 @@
 <div class="flex flex-col w-full justify-center h-fit mt-10">
   {#if $ModeHostState === ModeHostPassed}
     <div>
-      <h1>Host</h1>
+      <HostQuizListView />
     </div>
   {/if}
   {#if $ModeHostState === ModeHostLogin}

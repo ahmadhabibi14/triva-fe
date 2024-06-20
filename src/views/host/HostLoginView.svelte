@@ -7,6 +7,7 @@
   import axios from 'axios';
   import toast, { Toaster } from 'svelte-french-toast';
   import { type HTTPResponse } from '../../types/http';
+  import { type User } from '../../types/user';
 
   let username: string = '';
   let password: string = '';
@@ -19,26 +20,29 @@
 	}
   
   type loginOut = {
-    session: string;
-    message: string;
+    session_key: string;
+    user: User;
   }
 
   async function Login() {
     isSubmitted = true;
 
     const payload: loginIn = { username, password }
-    const url: string = import.meta.env.VITE_WEB_HOST+'/api/auth/login';
+    const url: string = import.meta.env.VITE_WEB_HOST+'/auth/login';
 
     await axios.post(url, payload,
-      { headers: { 'Content-Type': 'application/json' } }
+      {
+        headers: { 'Content-Type': 'application/json' },
+        withCredentials: true
+      }
     ).then((resp) => {
       isSubmitted = false;
 
       const body: HTTPResponse = resp.data as HTTPResponse;
       const out: loginOut = body.data as loginOut;
 
-      toast.success(out.message);
-      localStorage.setItem('session_id', out.session);
+      toast.success('login successful !');
+      localStorage.setItem('session_id', out.session_key);
 
       setTimeout(() => ModeHostState.set(ModeHostPassed), 1200);
     }).catch((err) => {

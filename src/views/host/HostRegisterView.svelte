@@ -7,6 +7,7 @@
   import axios from 'axios';
   import toast, { Toaster } from 'svelte-french-toast';
   import { type HTTPResponse } from '../../types/http';
+  import { type User } from '../../types/user';
 
   let email: string = '';
   let username: string = '';
@@ -23,7 +24,7 @@
 	}
   
   type registerOut = {
-    message: string;
+    user: User
   }
 
   async function Register() {
@@ -40,7 +41,7 @@
       const body: HTTPResponse = resp.data as HTTPResponse;
       const out: registerOut = body.data as registerOut;
 
-      toast.success(out.message);
+      toast.success('user '+out.user.username+' created');
       setTimeout(() => ModeHostState.set(ModeHostLogin), 1200);
     }).catch((err) => {
       isSubmitted = false;
