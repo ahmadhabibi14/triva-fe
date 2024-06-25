@@ -9,7 +9,6 @@
     } from "../../states/mode";
     import { onMount } from "svelte";
     import HostCreateQuizView from "./HostCreateQuizView.svelte";
-
     const sessionId: string = localStorage.getItem("session_id") || "";
 
     onMount(() => {
